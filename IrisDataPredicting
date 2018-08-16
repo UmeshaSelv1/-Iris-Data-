@@ -15,15 +15,13 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.externals import joblib
 
-
+# Provide file path for training data
 url = "irisData"
 names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 dataset = pandas.read_csv(url, names=names)
 
 # Shape
 print(dataset.shape)
-# Head
-print(dataset.head(20))
 # Summary
 print(dataset.describe())
 # Class distribution
@@ -51,7 +49,7 @@ seed = 7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
 
  
-# Splitting dataset into 10 parts; 9 to train and 1 to test
+# Splitting dataset 
 seed = 7
 scoring = 'accuracy'
  
@@ -100,9 +98,10 @@ print(classification_report(Y_validation, predictions))
 #Predicting for new data set using most accurate algorithm
 pipe = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis())
 pipe.fit(X_train, Y_train)
-joblib.dump(pipe, 'irisTest.pkl')
+joblib.dump(pipe, 'irisData.pkl')
 
-pipe = joblib.load('irisTest.pkl')
+pipe = joblib.load('irisData.pkl')
+# Provide file path for test data
 pr = pandas.read_csv("irisTestData")
 
 pred = pandas.Series(pipe.predict(pr))
