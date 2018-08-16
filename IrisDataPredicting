@@ -95,7 +95,7 @@ print(confusion_matrix(Y_validation, predictions))
 print(classification_report(Y_validation, predictions))
 
 
-#Predicting for new data set using most accurate algorithm
+#Predicting for new data set using algorithm with the highest accuracy 
 pipe = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis())
 pipe.fit(X_train, Y_train)
 joblib.dump(pipe, 'irisData.pkl')
